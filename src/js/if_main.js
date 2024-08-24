@@ -42,162 +42,165 @@ $(function() {
         dom.addSimInput();
         await gameInit();
       }
-    })
-
-    $(document).on("keydown", "#classicStyleInput", function (event) {
-        if (event.which == 13) {
-          try {
-            parseAction($("#classicStyleInput").val());
-          } catch (error) {
-            console.log(error);
-          }
-          $("#classicStyleInput").val("");
-          event.preventDefault();
-        }
-        if (event.which == 38) {
-             $("#classicStyleInput").val(previousInput);
-        }
-    })
-
-    $(document).on("click", ".modernActionButton", function (event) {
-        parseAction($(event.currentTarget).attr("value"));
-        event.preventDefault;
-    })
-
-    $(document).on("click", ".modernDirectionButton", function (event) {
-        parseAction($(event.currentTarget).attr("value"));
-        event.preventDefault;
-    })
-
-    $(document).on("click", ".gamebookDirectionButton", function (event) {
-        parseAction($(event.currentTarget).attr("value"));
-        event.preventDefault;
-    })
-
-
-    /////////////////////////////////////////
-    //Game loading/saving/deleting/exporting/
-    /////////////////////////////////////////
-    $(document).on("click", "#loadGame", function() {
-      loadGame();
-    })
-
-    $(document).on("click", "#saveGame", function() {
-      saveGame();
-    })
-
-    $(document).on("click", "#deleteNode", function() {
-        deleteNode();
-    })
-
-    $(document).on("click", "#exportGame", function() {
-      exportGame();
-    })
-
-    /////////////////////////////////
-    //Global Settings/Start Settings
-    /////////////////////////////////
-    $(document).on("click", "#globalActionsOpen", function () {
-      $("#globalActionsDisplay").css("visibility", "visible");
-      dom.handleGlobalCheckboxes("actions");
-    })
-
-    $(document).on("click", "#initItemsOpen", function () {
-      $("#initItemsDisplay").css("visibility", "visible");
-      dom.handleGlobalCheckboxes("items");
-    })
-
-    $(document).on("click", "#monitorsOpen", function () {
-        $("#monitorsDisplay").css("visibility", "visible");
-        dom.handleGlobalCheckboxes("monitors");
-      })
-
-    $(document).on("click", "#conDepOpen", function () {
-      $("#conDepDisplay").css("visibility", "visible");
-    })
-
-    $(document).on("click", "#conWitOpen", function () {
-      $("#conWitDisplay").css("visibility", "visible");
-    })
-
-    $(document).on("click", "#takesOpen", function () {
-      $("#takesDisplay").css("visibility", "visible");
-    })
-
-    $(document).on("click", "#dropsOpen", function () {
-      $("#dropsDisplay").css("visibility", "visible");
-    })
-
-    $(document).on("click", "#ignorablesOpen", function () {
-      $("#ignorablesDisplay").css("visibility", "visible");
-    })
-
-    $(document).on("click", "#looksOpen", function () {
-      $("#looksDisplay").css("visibility", "visible");
-    })
-
-    $(document).on("click", "#examinesOpen", function () {
-      $("#examinesDisplay").css("visibility", "visible");
-    })
-
-    $(document).on("click", "#winOpen", function () {
-        $("#globalWinDisplay").css("visibility", "visible");
-        dom.handleGlobalCheckboxes("win");
-    })
-
-    $(document).on("click", "#loseOpen", function () {
-        $("#globalLoseDisplay").css("visibility", "visible");
-        dom.handleGlobalCheckboxes("lose");
-    })
-
-    $("#addGlobalAction").click(function () {
-        dom.addGlobalAction();
-    });
-
-    $("#addInitItem").click(function () {
-        dom.addInitItem();
-    });
-
-    $(document).on("click", ".addInitEvoItems", function (event) {
-        let itemIndex = $(event.currentTarget.parentElement).index() + 1;
-        let baseId = $(event.currentTarget.parentElement).attr("id");
-        let listId = `${baseId}_EvoList`;
-        dom.addInitEvo(listId, itemIndex);
-    });
-
-    $("#addMonitor").click(function () {
-        dom.addMonitor();
-    });
-
-      $("#addGlobalWin").click(function () {
-            dom.addGlobalWin();
-        });
-
-      $("#addGlobalLose").click(function () {
-            dom.addGlobalLose();
-        });
-
-    dom.loadDefaultCommands();
-
-    /////////////////
-    //Game Settings//
-    /////////////////
-
-  $(document).on("click", "#settingsOpen", function () {
-    $("#settingsDisplay").css("visibility","visible");
+    } else {
+      dom.addSimInput();
+      await gameInit();
+    }
   });
 
-  $(document).on('click', '.popupClose', function(event) {
+  $(document).on("keydown", "#classicStyleInput", function (event) {
+    if (event.which == 13) {
+      try {
+        parseAction($("#classicStyleInput").val());
+      } catch (error) {
+        console.log(error);
+      }
+      $("#classicStyleInput").val("");
+      event.preventDefault();
+    }
+    if (event.which == 38) {
+      $("#classicStyleInput").val(previousInput);
+    }
+  });
+
+  $(document).on("click", ".modernActionButton", function (event) {
+    parseAction($(event.currentTarget).attr("value"));
+    event.preventDefault;
+  });
+
+  $(document).on("click", ".modernDirectionButton", function (event) {
+    parseAction($(event.currentTarget).attr("value"));
+    event.preventDefault;
+  });
+
+  $(document).on("click", ".gamebookDirectionButton", function (event) {
+    parseAction($(event.currentTarget).attr("value"));
+    event.preventDefault;
+  });
+
+  /////////////////////////////////////////
+  //Game loading/saving/deleting/exporting/
+  /////////////////////////////////////////
+  $(document).on("click", "#loadGame", function () {
+    loadGame();
+  });
+
+  $(document).on("click", "#saveGame", function () {
+    saveGame();
+  });
+
+  $(document).on("click", "#deleteNode", function () {
+    deleteNode();
+  });
+
+  $(document).on("click", "#exportGame", function () {
+    exportGame();
+  });
+
+  /////////////////////////////////
+  //Global Settings/Start Settings
+  /////////////////////////////////
+  $(document).on("click", "#globalActionsOpen", function () {
+    $("#globalActionsDisplay").css("visibility", "visible");
+    dom.handleGlobalCheckboxes("actions");
+  });
+
+  $(document).on("click", "#initItemsOpen", function () {
+    $("#initItemsDisplay").css("visibility", "visible");
+    dom.handleGlobalCheckboxes("items");
+  });
+
+  $(document).on("click", "#monitorsOpen", function () {
+    $("#monitorsDisplay").css("visibility", "visible");
+    dom.handleGlobalCheckboxes("monitors");
+  });
+
+  $(document).on("click", "#conDepOpen", function () {
+    $("#conDepDisplay").css("visibility", "visible");
+  });
+
+  $(document).on("click", "#conWitOpen", function () {
+    $("#conWitDisplay").css("visibility", "visible");
+  });
+
+  $(document).on("click", "#takesOpen", function () {
+    $("#takesDisplay").css("visibility", "visible");
+  });
+
+  $(document).on("click", "#dropsOpen", function () {
+    $("#dropsDisplay").css("visibility", "visible");
+  });
+
+  $(document).on("click", "#ignorablesOpen", function () {
+    $("#ignorablesDisplay").css("visibility", "visible");
+  });
+
+  $(document).on("click", "#looksOpen", function () {
+    $("#looksDisplay").css("visibility", "visible");
+  });
+
+  $(document).on("click", "#examinesOpen", function () {
+    $("#examinesDisplay").css("visibility", "visible");
+  });
+
+  $(document).on("click", "#winOpen", function () {
+    $("#globalWinDisplay").css("visibility", "visible");
+    dom.handleGlobalCheckboxes("win");
+  });
+
+  $(document).on("click", "#loseOpen", function () {
+    $("#globalLoseDisplay").css("visibility", "visible");
+    $("#globalLoseDisplay").css("", "visible");
+    dom.handleGlobalCheckboxes("lose");
+  });
+  $("#addGlobalAction").click(function () {
+    dom.addGlobalAction();
+  });
+
+  $("#addInitItem").click(function () {
+    dom.addInitItem();
+  });
+
+  $(document).on("click", ".addInitEvoItems", function (event) {
+    let itemIndex = $(event.currentTarget.parentElement).index() + 1;
+    let baseId = $(event.currentTarget.parentElement).attr("id");
+    let listId = `${baseId}_EvoList`;
+    dom.addInitEvo(listId, itemIndex);
+  });
+
+  $("#addMonitor").click(function () {
+    dom.addMonitor();
+  });
+
+  $("#addGlobalWin").click(function () {
+    dom.addGlobalWin();
+  });
+
+  $("#addGlobalLose").click(function () {
+    dom.addGlobalLose();
+  });
+
+  dom.loadDefaultCommands();
+
+  /////////////////
+  //Game Settings//
+  /////////////////
+
+  $(document).on("click", "#settingsOpen", function () {
+    $("#settingsDisplay").css("visibility", "visible");
+  });
+
+  $(document).on("click", ".popupClose", function (event) {
     let saveOnClose = [
       "initItemsDisplay",
       "globalActionsDisplay",
       "monitorsDisplay",
       "globalWinDisplay",
       "globalLoseDisplay",
-      "nodeLocationDisplay"
+      "nodeLocationDisplay",
     ];
     let parent = event.currentTarget.parentElement;
-    if ($(parent).is(':visible')){
+    if ($(parent).is(":visible")) {
       if (saveOnClose.includes(parent.id)) {
         $(parent).find(".notBox").css("visibility", "hidden");
         saveGlobalActions();
@@ -211,131 +214,137 @@ $(function() {
     }
   });
 
-    /////////////////////
-    //Node Map Controls
-    /////////////////////
-    $(document).on("click", '.zoom', function (event) {
-        let baseId = $(event.currentTarget).attr('id');
-        zoom(baseId);
-    })
+  /////////////////////
+  //Node Map Controls
+  /////////////////////
+  $(document).on("click", ".zoom", function (event) {
+    let baseId = $(event.currentTarget).attr("id");
+    zoom(baseId);
+  });
 
-    $('#zIndex').on("change", function (event) {
-        draw();
-    })
+  $("#zIndex").on("change", function (event) {
+    draw();
+  });
 
-    $(document).on("click", ".nodeColor", function (event) {
-        let color = $(event.currentTarget).val();
-        dom.setNodeColor(color);
-    });
+  $(document).on("click", ".nodeColor", function (event) {
+    let color = $(event.currentTarget).val();
+    dom.setNodeColor(color);
+  });
 
+  //////////////////////////
+  //DOM and DOM Generation
+  /////////////////////////
+  nodeMap();
 
+  $(document).on("click", "#testGame", function () {
+    startGameSim();
+    $("html, body").animate(
+      {
+        scrollTop: $("#gameSim").offset().top,
+      },
+      500
+    );
+  });
 
-    //////////////////////////
-    //DOM and DOM Generation
-    /////////////////////////
-    nodeMap();
+  $(window).on("resize", function (event) {
+    resizeCanvas();
+  });
 
-    $(document).on("click", '#testGame', function () {
-        startGameSim();
-        $('html, body').animate({
-        scrollTop: $("#gameSim").offset().top
-    }, 500);
-    })
+  $(document).on("click", "#nodeColor", function () {
+    $("#nodeColorDisplay").css("visibility", "visible");
+  });
 
-    $(window).on("resize", function (event) {
-        resizeCanvas();
-    })
+  $(document).on("click", ".removeObject", function (event) {
+    let baseId = $(event.currentTarget.parentElement).attr("id");
+    dom.removeObject(baseId);
+  });
 
-    $(document).on("click", "#nodeColor", function () {
-        $("#nodeColorDisplay").css("visibility", "visible");
-    });
+  $(document).on("click", ".addEvoItems", function (event) {
+    let itemIndex = $(event.currentTarget.parentElement).index();
+    let baseId = $(event.currentTarget.parentElement).attr("id");
+    let listId = `${baseId}_EvoList`;
+    dom.addEvo(listId, itemIndex);
+  });
 
-    $(document).on("click", '.removeObject', function (event) {
-        let baseId = $(event.currentTarget.parentElement).attr('id');
-        dom.removeObject(baseId);
-    });
+  $(document).on("click", ".addEvoDes", function (event) {
+    let listId = "evoListDescriptions";
+    dom.addEvo(listId);
+  });
 
-    $(document).on("click", '.addEvoItems', function (event) {
-        let itemIndex = $(event.currentTarget.parentElement).index();
-        let baseId = $(event.currentTarget.parentElement).attr('id');
-        let listId = `${baseId}_EvoList`;
-        dom.addEvo(listId, itemIndex);
-    });
+  $(document).on("click", ".addEvoInvalid", function (event) {
+    let listId = "evoListInvalids";
+    dom.addEvo(listId);
+  });
 
-    $(document).on("click", '.addEvoDes', function (event) {
-        let listId = 'evoListDescriptions';
-        dom.addEvo(listId);
-    });
+  $(document).on("click", ".removeEvo", function (event) {
+    let baseId = $(event.currentTarget.parentElement).attr("id");
+    let listId = $(event.currentTarget.parentElement.parentElement).attr("id");
+    dom.removeEvo(listId, baseId);
+  });
 
-    $(document).on("click", ".addEvoInvalid", function (event) {
-        let listId = "evoListInvalids";
-        dom.addEvo(listId);
-    });
+  $(document).on("click", ".blockBtn", function (event) {
+    let baseId = $(event.currentTarget).attr("id");
+    dom.showHide(baseId);
+  });
 
-    $(document).on("click", '.removeEvo', function (event) {
-        let baseId = $(event.currentTarget.parentElement).attr('id');
-        let listId = $(event.currentTarget.parentElement.parentElement).attr('id');
-        dom.removeEvo(listId, baseId);
-    });
+  $(document).on("click", "#directions", function (event) {
+    let inputs = $(event.currentTarget).find("input");
+    dom.directions(inputs);
+  });
 
-    $(document).on("click", '.blockBtn', function (event) {
-        let baseId = $(event.currentTarget).attr('id');
-        dom.showHide(baseId);
-    })
+  $(document).on("click", "#location", function () {
+    $("#nodeLocationDisplay").css("visibility", "visible");
+  });
 
-    $(document).on("click", '#directions', function (event) {
-        let inputs = $(event.currentTarget).find('input');
-        dom.directions(inputs);
-    })
+  $("#addItem").click(function () {
+    dom.addItem();
+  });
 
-    $(document).on("click", "#location", function () {
-        $("#nodeLocationDisplay").css("visibility","visible");
-      });
+  $("#addContainer").click(function () {
+    dom.addContainer();
+  });
 
-    $('#addItem').click(function () {
-        dom.addItem();
-    })
+  $("#addAction").click(function () {
+    dom.addAction();
+  });
 
-    $('#addContainer').click(function () {
-        dom.addContainer();
-    })
+  $("#winBlock").append(dom.getRequirements("win"));
+  $("#loseBlock").append(dom.getRequirements("lose"));
 
-    $('#addAction').click(function () {
-        dom.addAction();
-    })
+  $(document).on("click", ".toggleNots", function (event) {
+    let eventId = event.currentTarget.id;
+    let baseId = eventId.slice(0, eventId.lastIndexOf("_"));
+    let status;
+    if ($(`#${eventId}`).is(":checked")) {
+      status = true;
+    } else {
+      status = false;
+    }
+    dom.showHideNotBoxes(baseId, status);
+  });
 
-    $('#winBlock').append(dom.getRequirements('win'));
-    $('#loseBlock').append(dom.getRequirements('lose'));
+  $(document).on("change", "#gameStyle", function (event) {
+    dom.changeStyle(event.currentTarget.value);
+  });
 
-    $(document).on("click", ".toggleNots", function (event) {
-        let eventId = event.currentTarget.id;
-        let baseId = eventId.slice(0, eventId.lastIndexOf('_'));
-        let status;
-        if ($(`#${eventId}`).is(":checked")) {
-          status = true;
-        } else {
-          status = false;
-        }
-        dom.showHideNotBoxes(baseId, status);
-    });
+  $(document).on("click", ".showHideReqs", function (event) {
+    if ($(event.currentTarget).text() == String.fromCharCode(9660)) {
+      $(event.currentTarget).html(String.fromCharCode(9650));
+      $(event.currentTarget)
+        .closest(".requirements")
+        .find(".thisBlock")
+        .css("display", "block");
+    } else if ($(event.currentTarget).text() == String.fromCharCode(9650)) {
+      $(event.currentTarget).html(String.fromCharCode(9660));
+      $(event.currentTarget)
+        .closest(".requirements")
+        .find(".thisBlock")
+        .css("display", "none");
+    }
+  });
 
-    $(document).on("change", "#gameStyle", function(event) {
-      dom.changeStyle(event.currentTarget.value);
-    })
-
-    $(document).on("click", ".showHideReqs", function(event) {
-        if ($(event.currentTarget).text() == String.fromCharCode(9660)) {
-            $(event.currentTarget).html(String.fromCharCode(9650));
-            $(event.currentTarget).closest(".requirements").find(".thisBlock").css("display", "block");
-        } else if ($(event.currentTarget).text() == String.fromCharCode(9650)) {
-            $(event.currentTarget).html(String.fromCharCode(9660));
-            $(event.currentTarget).closest(".requirements").find(".thisBlock").css("display", "none");
-        }
-    });
-
-    //Check for constructed action inputs and handle pureAction validity
-    $(document).on("keydown", ".constructedInput", async function(event) {
-        dom.checkConstructedActionInputs();
-    })
-})
-
+  //Check for constructed action inputs and handle pureAction validity
+  $(document).on("keydown", ".constructedInput", async function (event) {
+    dom.checkConstructedActionInputs();
+  });
+});
