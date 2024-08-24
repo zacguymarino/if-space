@@ -10,30 +10,35 @@ import {
   saveGlobalWin,
   saveGlobalLose,
   saveNodeLocation,
-  cNode,
-} from "./if_generate.js";
-import * as dom from "./if_dom.js";
-import { nodeMap, resizeCanvas, zoom, draw } from "./if_nodemap.js";
-import { gameInit, parseAction, previousInput } from "./if_parser.js";
-import { confirm } from "./api/dialog.js";
+  cNode} from "./if_generate.js";
+import * as dom from './if_dom.js';
+import {nodeMap, resizeCanvas, zoom, draw} from './if_nodemap.js';
+import {gameInit, parseAction, previousInput} from './if_parser.js';
+import { confirm } from './api/dialog.js';
 
-$(function () {
-  //////////
-  ///Init///
-  //////////
-  dom.loadDomFromNode(cNode);
+$(function() {
+    //////////////////////////////
+    ///Page Reload Notification///
+    //////////////////////////////
+    window.addEventListener('beforeunload', (event) => {
+      event.preventDefault();
+    });
 
-  ///////////////
-  //Game Testing
-  ///////////////
-  $(document).on("click", "#restartGameSim", async function () {
-    if ($("#outputSim").children().length != 0) {
-      if (
-        await confirm(
-          "Are you sure you want to restart? Any progress will be lost.",
-          { title: "ifSpace", type: "warning" }
-        )
-      ) {
+    //////////
+    ///Init///
+    //////////
+    dom.loadDomFromNode(cNode);
+
+    ///////////////
+    //Game Testing
+    ///////////////
+    $(document).on("click", "#restartGameSim", async function() {
+      if ($("#outputSim").children().length != 0) {
+        if (await confirm("Are you sure you want to restart? Any progress will be lost.", {title: 'ifSpace', type: 'warning'})) {
+          dom.addSimInput();
+          await gameInit();
+        }
+      } else {
         dom.addSimInput();
         await gameInit();
       }
